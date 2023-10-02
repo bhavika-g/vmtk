@@ -1,19 +1,12 @@
+##Define voronoi diagram
+##Set radius thresholds to get a reduced voronoi
+##Find closest points on the reduced voronoi from the original voronoi 
+##Use the obtained closest points for endpoint detection 
+
 import vtk 
 import numpy as np 
 import slicer
-#endpoints= []
 
-#markupsNode = slicer.util.getNode('Endpoints')
-
-# Iterate through the markups in the node and store the points
-# for i in range(markupsNode.GetNumberOfControlPoints()):
-#     point = [0, 0, 0]
-#     markupsNode.GetNthControlPointPosition(i, point)
-#     endpoints.append(point)
-
-# Convert to a numpy array if desired
-
-#initial_endpoints = np.array(endpoints)
 
 voronoi_node = slicer.util.getNode('Voronoi diagram')
 voronoi = voronoi_node.GetPolyData()
@@ -61,6 +54,8 @@ markupsNode.SetName('Complete Endpoints')
 
 for point in closest_points:
     markupsNode.AddControlPoint(point[0], point[1], point[2])
+
+
 # adjusted_endpoints= []
 # for point in initial_endpoints:
 #     closest_point_id = locator.FindClosestPoint(point)
